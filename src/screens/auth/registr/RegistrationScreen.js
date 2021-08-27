@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {
-    StyleSheet,
+    Linking,
     Text,
     TextInput,
     View,
@@ -98,6 +98,11 @@ function RegistrationScreen({ navigation }) {
     const onPressBack = () => {
         setStatusAuth(false);
     };
+
+    const URLHandler = () => {
+        const url = 'https://moveon-app.com/about/content-labeling-rules.html';
+        Linking.openURL(url).catch(err => console.error('An error occurred', err));
+    }
 
     const onPressForgotPassword = () => {
         console.log("onPressForgotPassword")
@@ -244,25 +249,44 @@ function RegistrationScreen({ navigation }) {
                 или
             </Text>
 
-                <Pressable
-                    onPress={onPressNextRegistr}
-                    style={[styles.registr]}
-                    >
-                        <Text style={styles.textRegistr}>
-                            Войти
-                        </Text>
-                </Pressable>
-                {show && (
-                    <DateTimePicker
-                    testID="dateTimePickery"
-                    value={date}
-                    mode={'date'}
-                    is24Hour={true}
-                    display="default"
-                    onChange={onChange}
-                    />
-                )}
-                </View>
+            <Pressable
+                onPress={onPressNextRegistr}
+                style={[styles.registr]}
+                >
+                    <Text style={styles.textRegistr}>
+                        Войти
+                    </Text>
+            </Pressable>
+
+            <Pressable
+            onPress={URLHandler}
+            style={styles.buttonUrlPolitic}
+            >
+                <Text style={[
+                GlobalStyle.CustomFontRegular,
+                styles.textIUrlPolitic
+                ]}>
+                        Нажимая кнопку далее вы соглашаетесь с
+                </Text>
+                <Text style={[
+                GlobalStyle.CustomFontRegular,
+                styles.textIUrlPoliticBut
+                ]}>
+                        Пользовательским соглашением
+                </Text>
+            </Pressable>
+
+            {show && (
+                <DateTimePicker
+                testID="dateTimePickery"
+                value={date}
+                mode={'date'}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+                />
+            )}
+        </View>
         </LinearGradient>
     );
 }

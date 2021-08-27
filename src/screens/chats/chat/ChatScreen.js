@@ -32,13 +32,14 @@ function ChatScreen({ route, navigation }) {
     const chatData = useContext(ChatContext);
     const [chat, setChat] = useState(null);
     const [event, setEvent] = useState(null);
+    const [statusBlock, setStatusBlock] = useState(false);
 
     const getChatService = useCallback(async () => {
         clearError();
         try {
             let data;
             if(id_chat) {
-               data = await request(`/api/chats/${id_chat}`, 'GET', null, {
+                data = await request(`/api/chats/${id_chat}`, 'GET', null, {
                     Authorization: `${auth.token}`
                 });
             } else {
@@ -49,6 +50,7 @@ function ChatScreen({ route, navigation }) {
             chatData.openChat(data.id_chat, data.messages_set);
             setChat(data.chat);
             setEvent(data.event);
+            setStatusBlock(data.status_block);
         } catch (e) {}
     }, [auth.token, request]);
 
@@ -78,17 +80,6 @@ function ChatScreen({ route, navigation }) {
         //         id: id,
         //     });
         // }
-    }
-
-    const sendHandler = async () => {
-        try {
-            chatData.addMessage({who_sent: true, date: new Date(), message: form}, chatData.messages);
-            setForm("");
-            const data = await request('/api/chats/message', 'POST', {id_chat: chatData.id_chat_active, message: form, id_personal_profile: profile_id ? profile_id : null}, {
-                Authorization: `${auth.token}`
-            });
-            chatData.nextIdChat(data.id_chat);
-        } catch (e) {}
     }
 
     return (
@@ -149,10 +140,19 @@ function ChatScreen({ route, navigation }) {
                 }
                     
             </ScrollView>
+            {!statusBlock ? (
             <InputBox
-            chatRoomID={'10'}
             profile_id={profile_id}
             />
+            ) : (
+                <Text style={[
+                    GlobalStyle.CustomFontMedium,
+                    styles.errorBlock
+                ]}>
+                    Вы находитесь в черном списке у этого пользователя
+                </Text>
+            )}
+
             {/* <View style={styles.panelInput}>
                 <View style={styles.inputBorder}>
                 <TextInput

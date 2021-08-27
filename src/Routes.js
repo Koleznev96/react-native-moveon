@@ -16,6 +16,8 @@ import SetingScreen from './screens/profile/seting/SetingScreen';
 import SubscriptionsScreen from './screens/profile/subscri/SubscriptionsScreen';
 import SubscribersScreen from './screens/profile/subscri/SubscribersScreen';
 import UpdateAccountScreen from './screens/profile/seting/updateAccount/UpdateAccountScreen';
+import ComplaintScreen from './screens/profile/complaint/ComplaintScreen';
+import NextComplaintScreen from './screens/profile/complaint/nexComplaint/NextComplaintScreen';
 
 import NewEventScreen from './screens/newEvent/NewEventScreen';
 import NewEventNextScreen from './screens/newEvent/NewEventNextScreen';
@@ -172,6 +174,8 @@ export const Routes = isAuthenticated => {
           <Stack.Screen name='SetingEvent' component={SetingEventScreen} options={{ headerShown: false }}/>
           <Stack.Screen name='Notifications' component={NotificationsScreen} options={{ headerShown: false }}/>
           <Stack.Screen name='UpdateAccount' component={UpdateAccountScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name='Complaint' component={ComplaintScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name='NextComplaint' component={NextComplaintScreen} options={{ headerShown: false }}/>
         </Stack.Navigator>
       ) : ( 
         <Stack.Navigator initialRouteName='Login'>

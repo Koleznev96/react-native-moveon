@@ -156,6 +156,26 @@ export const styles = StyleSheet.create({
         width: 25,
         height: 25,
     },
+    cameraPanel: {
+        width: '100%',
+        height: 200,
+        position: 'absolute',
+        bottom: 0,
+    },
+    menuPanel: {
+        width: '100%',
+        height: 250,
+        position: 'absolute',
+        bottom: 0,
+    },
+    bacdoor: {
+        top: 0,
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        flex: 1,
+        width: '100%',
+        height: '100%',
+    },
     dialogView: {
         width: '100%',
         paddingLeft: 10,   
@@ -164,6 +184,14 @@ export const styles = StyleSheet.create({
     dialogTypePhoto: {
         width: '100%',
         height: 120,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 12,
+    },
+    dialogTypeMenu: {
+        width: '100%',
+        height: 160,
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
@@ -185,8 +213,17 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    buttonMenu: {
+        width: '100%',
+        height: '33%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     textConstButtonPhoto: {
         color: '#2D65EF',
+    },
+    textConstButtonBloc: {
+        color: 'red',
     },
     hrPhone: {
         width: '100%',

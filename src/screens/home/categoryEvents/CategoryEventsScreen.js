@@ -22,6 +22,7 @@ function CategoryEventsScreen({ route, navigation }) {
     const {loading, request, error, clearError} = useHttp();
     const [events, setEvents] = useState([]);
     const { item } = route.params;
+    const [status_loader_events, set_status_loader_events] = useState(false);
 
     const getEventsService = useCallback(async () => {
         try {
@@ -141,12 +142,12 @@ function CategoryEventsScreen({ route, navigation }) {
                     id={item.event._id}
                     />
                 ))}
-                {events.length % 20 === 0 ? (
+                {events.length % 20 === 0 ? (events.length !== 0 ? (
                 <LoaderEvents
                 status_loader_events={status_loader_events}
                 loaderEventsHandler={loaderEventsHandler}
                 />
-                ): null}
+                ): null): null}
                 </>
             )}
 

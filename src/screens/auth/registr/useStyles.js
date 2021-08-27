@@ -112,5 +112,19 @@ export const styles = StyleSheet.create({
     buttonClearError: {
         position: 'absolute',
         right: 16,
-    }
+    },
+    buttonUrlPolitic: {
+        width: '100%',
+        position: 'absolute',
+        left: 16,
+        bottom: 20,
+    },
+    textIUrlPolitic: {
+        fontSize: 13,
+        color: '#000',
+    },
+    textIUrlPoliticBut: {
+        fontSize: 13,
+        color: '#fff',
+    },
 });

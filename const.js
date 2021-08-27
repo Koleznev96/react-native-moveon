@@ -1,5 +1,5 @@
 // localhost
-// export const httpServer = "http://192.168.1.34:500";
+// export const httpServer = "http://192.168.1.36:3000";
 
 // Хероку 
 // export const httpServer = "https://moveon-strit.herokuapp.com";

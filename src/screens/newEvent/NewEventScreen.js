@@ -4,7 +4,8 @@ import {
     View,
     TextInput,
     Pressable,
-    ScrollView
+    ScrollView,
+    Linking
 } from 'react-native';
 import {AuthContext} from "../../context/authContext";
 import {useHttp} from "../../hooks/http.hook";
@@ -68,6 +69,11 @@ function NewEventScreen({ navigation }) {
 
     const setTypeHandler = () => {
         console.log("setTypeHandler");
+    }
+
+    const URLHandler = () => {
+        const url = 'https://moveon-app.com/about/content-labeling-rules.html';
+        Linking.openURL(url).catch(err => console.error('An error occurred', err));
     }
 
     function set_date(date) {
@@ -217,6 +223,25 @@ function NewEventScreen({ navigation }) {
                     </View>
                 </View>
             </View>
+
+            <Pressable
+            onPress={URLHandler}
+            style={styles.buttonUrlPolitic}
+            >
+                <Text style={[
+                GlobalStyle.CustomFontRegular,
+                styles.textIUrlPolitic
+                ]}>
+                        Нажимая кнопку далее вы соглашаетесь с
+                </Text>
+                <Text style={[
+                GlobalStyle.CustomFontRegular,
+                styles.textIUrlPoliticBut
+                ]}>
+                        Пользовательским соглашением
+                </Text>
+            </Pressable>
+
             <View style={styles.buttonPanel}>
             <Pressable
             style={styles.buttonCreat}

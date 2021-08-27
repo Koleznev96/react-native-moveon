@@ -36,12 +36,14 @@ export const ProfileView = ({navigation, idProfile}) => {
     const [Refreshing, setRefreshing] = useState(false);
     const [statusProfileMy, setStatusProfileMy] = useState(null);
     const [status_subscriber, setStatus_subscriber] = useState(null);
+    const [panel_menu, set_panel_menu] = useState(null);
+    const [status_block, set_status_block] = useState(false);
 
     const [isUploading, setIsUploading] = useState(false);
     const [panel, setPanel] = useState(null);
 
     const launchCameraImageHandler = () => {
-        panel.hide();
+        setPanel(false)
         launchCamera({onData: true, mediaType: 'photo'}, (response) => {
             console.log('Response = ', response);
           
@@ -58,7 +60,7 @@ export const ProfileView = ({navigation, idProfile}) => {
     }
 
     const launchImageLibraryHandler = () => {
-        panel.hide();
+        setPanel(false)
         launchImageLibrary({onData: true, mediaType: 'photo'}, (response) => {
             console.log('Response = ', response);
           
@@ -119,6 +121,9 @@ export const ProfileView = ({navigation, idProfile}) => {
             if(data.status_subscriber){
                 setStatus_subscriber(data.status_subscriber);
             }
+            if(data.status_block){
+                set_status_block(data.status_block);
+            }
             setNearest(data.nearest);
             setPlans(data.plans);
             setArchive(data.archive);
@@ -172,6 +177,22 @@ export const ProfileView = ({navigation, idProfile}) => {
         setStatusMenu(NEAREST);
     }
 
+    const complaintHandler = () => {
+        navigation.navigate('Complaint', {
+            id: profile._id,
+            type: 'profile',
+        });
+    }
+
+    const blockHandler = async () => {
+        try {
+            const data = await request(`/api/profiles/block/`, 'POST', {to_profile: profile._id}, {
+                Authorization: `${auth.token}`
+            });
+            set_status_block(data);
+        } catch (e) {}
+    }
+
     const SubsiderHandler = async () => {
         try {
             const data = await request(`/api/profiles/subscribe/${idProfile}`, 'POST', null, {
@@ -182,7 +203,7 @@ export const ProfileView = ({navigation, idProfile}) => {
     }
 
     return (
-        
+        <>
         <View style={styles.body}>
             
             <View style={styles.linerHeader}>
@@ -217,29 +238,10 @@ export const ProfileView = ({navigation, idProfile}) => {
                 </Pressable>
                 ) : (
                     <Pressable
-                    onPress={SubsiderHandler}
+                    onPress={() => set_panel_menu(true)}
                     style={styles.buttonSeting}
                     >
-                        {status_subscriber ?
-                        <Text style={[
-                            GlobalStyle.CustomFontRegular,
-                            styles.textSubscri
-                        ]}>
-                            Отписаться
-                        </Text>
-                        :
-                        <LinearTextGradient 
-                        locations={[0, 1]}
-                        colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        style={[
-                            GlobalStyle.CustomFontMedium,
-                            styles.textSubscri
-                        ]}>
-                            <Text>Подписаться</Text>
-                        </LinearTextGradient>
-                        }
+                        <Icon name={'more-horiz'} size={26} />
                     </Pressable>
                 ))}
             </View>
@@ -275,7 +277,7 @@ export const ProfileView = ({navigation, idProfile}) => {
 
                         {!profile.url_avatar ? (<Pressable 
                         style={styles.buttonAddAvatar} 
-                        onPress={() => panel.show()}
+                        onPress={() => setPanel(true)}
                         >
                             <Icon name="file-upload" size={30} />
                         </Pressable>
@@ -477,14 +479,17 @@ export const ProfileView = ({navigation, idProfile}) => {
             >
                 <Icon name="send" size={32} />
             </Pressable>
-            ) : null )}
+            ) : null )} 
+        </View>
 
-            <SlidingUpPanel 
-            friction={0.1}
-            ref={c => setPanel(c)}
-            height={300}
-            draggableRange={{top: 200, bottom: 0}}
-            allowDragging={false}
+        {panel && 
+            <>
+            <View
+            style={styles.bacdoor}
+            />
+
+            <View 
+            style={styles.cameraPanel}
             >
                 <View style={styles.dialogView}> 
                 <View style={styles.dialogTypePhoto}>
@@ -514,7 +519,7 @@ export const ProfileView = ({navigation, idProfile}) => {
                 </View>
 
                 <Pressable
-                onPress={() => panel.hide()}
+                onPress={() => setPanel(false)}
                 style={styles.buttonNoDialog}
                 >
                     <Text style={[
@@ -525,9 +530,74 @@ export const ProfileView = ({navigation, idProfile}) => {
                     </Text>
                 </Pressable>
                 </View>
-            </SlidingUpPanel>
-        </View>
-        
+            </View>
+            </>
+            }
+
+            {panel_menu && 
+            <>
+            <View
+            style={styles.bacdoor}
+            />
+
+            <View 
+            style={styles.menuPanel}
+            >
+                <View style={styles.dialogView}> 
+                <View style={styles.dialogTypeMenu}>
+                    <Pressable 
+                    onPress={SubsiderHandler}
+                    style={styles.buttonMenu} 
+                    >
+                        <Text style={[
+                            GlobalStyle.CustomFontRegular,
+                            styles.textConstButtonPhoto
+                        ]}>
+                            {status_subscriber ? "Отписаться" : "Подписаться"}
+                        </Text>
+                    </Pressable>
+                    <View style={styles.hrPhone} />
+                    <Pressable 
+                    onPress={complaintHandler}
+                    style={styles.buttonMenu} 
+                    >
+                        <Text style={[
+                            GlobalStyle.CustomFontRegular,
+                            styles.textConstButtonPhoto
+                        ]}>
+                            Пожаловаться
+                        </Text>
+                    </Pressable>
+                    <View style={styles.hrPhone} />
+                    <Pressable 
+                    onPress={blockHandler}
+                    style={styles.buttonMenu} 
+                    >
+                        <Text style={[
+                            GlobalStyle.CustomFontRegular,
+                            styles.textConstButtonBloc
+                        ]}>
+                            {status_block ? "Разблокировать" : "Заблокировать"}
+                        </Text>
+                    </Pressable>
+                </View>
+
+                <Pressable
+                onPress={() => set_panel_menu(false)}
+                style={styles.buttonNoDialog}
+                >
+                    <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textConstButtonPhoto
+                    ]}>
+                        Отмена
+                    </Text>
+                </Pressable>
+                </View>
+            </View>
+            </>
+            }
+        </>
     );
 }
 

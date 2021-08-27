@@ -25,6 +25,7 @@ function EventScreen({ route, navigation }) {
     const { id } = route.params;
     const [dataEvent, setDataEvent] = useState({});
     const [date, setDate] = useState(null);
+    const [panel_menu, set_panel_menu] = useState(null);
 
     const [image, setImage] = useState(httpServer + '/uploads/');
 
@@ -122,6 +123,13 @@ function EventScreen({ route, navigation }) {
         });
     }
 
+    const complaintHandler = () => {
+        navigation.navigate('Complaint', {
+            id: id,
+            type: 'event',
+        });
+    }
+
     const onShare = async () => {
         try {
             const result = await Share.share({
@@ -143,6 +151,7 @@ function EventScreen({ route, navigation }) {
     };
 
     return (
+        <>
         <View style={styles.body}>
             <View style={styles.linerHeader}>
                 <Pressable
@@ -170,6 +179,12 @@ function EventScreen({ route, navigation }) {
                 >
                     <Icon name="settings" size={26} />
                 </Pressable>) : null} */}
+                <Pressable
+                onPress={() => set_panel_menu(true)}
+                style={styles.buttonseting}
+                >
+                    <Icon name={'more-horiz'} size={26} />
+                </Pressable>
             </View>
 
             {loading ? (
@@ -359,6 +374,47 @@ function EventScreen({ route, navigation }) {
             </Pressable>
             ) : null} */}
         </View>
+
+            {panel_menu && 
+            <>
+            <View
+            style={styles.bacdoor}
+            />
+
+<View 
+            style={styles.cameraPanel}
+            >
+                <View style={styles.dialogView}> 
+                <View style={styles.dialogTypePhoto}>
+                    <Pressable 
+                    onPress={complaintHandler}
+                    style={styles.buttonPhone} 
+                    >
+                        <Text style={[
+                            GlobalStyle.CustomFontRegular,
+                            styles.textConstButtonPhoto
+                        ]}>
+                            Пожаловаться
+                        </Text>
+                    </Pressable>
+                </View>
+
+                <Pressable
+                onPress={() => set_panel_menu(false)}
+                style={styles.buttonNoDialog}
+                >
+                    <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textConstButtonPhoto
+                    ]}>
+                        Отмена
+                    </Text>
+                </Pressable>
+                </View>
+            </View>
+            </>
+            }
+        </>
     );
 }
 

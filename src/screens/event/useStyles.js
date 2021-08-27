@@ -197,5 +197,55 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
+    cameraPanel: {
+        width: '100%',
+        height: 140,
+        position: 'absolute',
+        bottom: 0,
+    },
+    bacdoor: {
+        top: 0,
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        flex: 1,
+        width: '100%',
+        height: '100%',
+    },
+    dialogView: {
+        width: '100%',
+        paddingLeft: 10,   
+        paddingRight: 10,
+    },
+    dialogTypePhoto: {
+        width: '100%',
+        height: 60,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 12,
+    },
+    buttonNoDialog: {
+        marginTop: 10,
+        marginBottom: 10,
+        width: '100%',
+        height: 60,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 12,
+    },
+    buttonPhone: {
+        width: '100%',
+        height: '50%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textConstButtonPhoto: {
+        color: '#2D65EF',
+    },
+    hrPhone: {
+        width: '100%',
+        height: 1,
+        backgroundColor: '#E9E9E9',
+    },
 });

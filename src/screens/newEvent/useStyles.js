@@ -109,6 +109,20 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    buttonUrlPolitic: {
+        width: '100%',
+        position: 'absolute',
+        left: 16,
+        bottom: 70,
+    },
+    textIUrlPolitic: {
+        fontSize: 13,
+        color: '#000',
+    },
+    textIUrlPoliticBut: {
+        fontSize: 13,
+        color: '#9E57DB',
+    },
     buttonPanel: {
         width: width,
         position: 'absolute',

@@ -283,12 +283,12 @@ function HomeScreen({ navigation }) {
                         id={item.event._id}
                     />
                 ))}
-                {events.length % 20 === 0 ? (
+                {events.length % 20 === 0 ? (events.length !== 0 ? (
                 <LoaderEvents
                 status_loader_events={status_loader_events}
                 loaderEventsHandler={loaderEventsHandler}
                 />
-                ): null}
+                ): null): null}
                 </>
             )}
 
