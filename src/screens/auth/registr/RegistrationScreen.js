@@ -12,6 +12,7 @@ import {useHttp} from "../../../hooks/http.hook";
 import {Loader} from "../../../components/loader/Loader";
 import GlobalStyle from "../../../components/GlobalStyle";
 import {styles} from "./useStyles";
+import {Icon} from "../../../components/icon/Icon";
 import LinearGradient from 'react-native-linear-gradient';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import PushNotification from 'react-native-push-notification';
@@ -28,10 +29,10 @@ function RegistrationScreen({ navigation }) {
     const [inputPhone, setInputPhone] = useState("");
     const [errorReg, setErrorReg] = useState("");
     const [fcm_token, setFcm_token] = useState("");
+    const [errorTelephone, setErrorTelephone] = useState("");
 
     PushNotification.configure({
         onRegister: function(token) {
-            console.log('TOKEN-', token);
             setFcm_token(token.token);
         }
     });
@@ -44,7 +45,6 @@ function RegistrationScreen({ navigation }) {
 
     const showMode = (currentMode) => {
         setShow(true);
-        console.log("hhhhhhh")
     };
 
     const showDatepicker = () => {
@@ -56,11 +56,12 @@ function RegistrationScreen({ navigation }) {
     };
 
     const AuthHandler = async () => {
-        
+        setErrorReg("");
+        setErrorTelephone("");
         if (statusAuth) {
 
             if (form.email.length < 12 || form.email.length > 12) {
-                return setErrorReg("Неверный формат номера телефона");
+                return setErrorTelephone("Неверный формат номера телефона");
             }
 
             else if (form.password !== form.re_password) {
@@ -78,15 +79,6 @@ function RegistrationScreen({ navigation }) {
                     fcm_token
                 });
             } catch (e) {}
-
-            // try {
-            //     const data = await request('/api/auth/register', 'POST', {...form, fcm_token});
-            //     navigation.navigate('Info', {
-            //         token: data.token,
-            //         email: form.email,
-            //         password: form.password
-            //     });
-            // } catch (e) {}
         } else {
             if (form.user_name.length < 4 || form.user_name.length > 12) {
                 return setErrorReg("Длина никнейма от 4 до 12 символов");
@@ -96,6 +88,8 @@ function RegistrationScreen({ navigation }) {
     };
 
     const onPressBack = () => {
+        setErrorReg("");
+        setErrorTelephone("");
         setStatusAuth(false);
     };
 
@@ -105,7 +99,7 @@ function RegistrationScreen({ navigation }) {
     }
 
     const onPressForgotPassword = () => {
-        console.log("onPressForgotPassword")
+
     };
 
     if (loading) {
@@ -119,27 +113,6 @@ function RegistrationScreen({ navigation }) {
             angle={180}
             style={styles.body}>
 
-            {errorReg ? (
-                <View style={styles.modalError}>
-                    <Text style={[
-                        GlobalStyle.CustomFontRegular,
-                        styles.textModalError,
-                    ]}>
-                        {errorReg}
-                    </Text>
-
-                    <Pressable 
-                        onPress={() => setErrorReg("")}
-                        style={styles.buttonClearError}
-                    >   
-                        <Image
-                        style={styles.iconClouse}
-                        source={require('../../../icon/clouse.png')}
-                        />   
-                    </Pressable>
-                </View>
-            ) : null}
-
             <View style={styles.root}>
 
             {statusAuth && (
@@ -147,10 +120,7 @@ function RegistrationScreen({ navigation }) {
                 onPress={() => onPressBack()}
                 style={styles.buttonBack}
                 >   
-                    <Image
-                    style={styles.iconBack}
-                    source={require('../../../image/back.png')}
-                    />   
+                    <Icon name="arrow-back-ios" size={26} color="#fff"/> 
                 </Pressable>
             )}
 
@@ -174,11 +144,21 @@ function RegistrationScreen({ navigation }) {
                     style={styles.input}
                     placeholder='Логин'
                     onChangeText={(value)=>setForm({...form, user_name: value})}
+                    value={form.user_name}
                 />
+                 {errorReg ? (
+                    <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textModalError,
+                    ]}>
+                        {errorReg}
+                    </Text>
+                ) : null}
                 <TextInput
                     style={styles.input}
                     placeholder='Город'
                     onChangeText={(value)=>setForm({...form, city: value})}
+                    value={form.city}
                 />
                 {/* <TextInput
                     onPress={showDatepicker}
@@ -205,28 +185,54 @@ function RegistrationScreen({ navigation }) {
                     style={styles.input}
                     placeholder='Телефон +7'
                     keyboardType="phone-pad"
-                    onFocus={() => setInputPhone("+7")}
+                    onFocus={() => setForm({...form, email: "+7"})}
                     onChangeText={(value)=>setForm({...form, email: value})}
                 >
                     <Text style={[
                         GlobalStyle.CustomFontRegular,
                         styles.textInputTelephone
                     ]}>
-                        {inputPhone}
+                        {form.email}
                     </Text>
                 </TextInput>
+                {errorTelephone ? (
+                    <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textModalError,
+                    ]}>
+                        {errorTelephone}
+                    </Text>
+                ) : null}
                 <TextInput
                     style={styles.input}
                     placeholder='Пароль'
                     secureTextEntry
                     onChangeText={(value)=>setForm({...form, password: value})}
+                    value={form.password}
                 />
+                {errorReg ? (
+                    <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textModalError,
+                    ]}>
+                        {errorReg}
+                    </Text>
+                ) : null}
                 <TextInput
                     style={styles.input}
                     placeholder='Повторите пароль'
                     secureTextEntry
                     onChangeText={(value)=>setForm({...form, re_password: value})}
+                    value={form.re_password}
                 />
+                {errorReg ? (
+                    <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textModalError,
+                    ]}>
+                        {errorReg}
+                    </Text>
+                ) : null}
                 </>
             )}
                 

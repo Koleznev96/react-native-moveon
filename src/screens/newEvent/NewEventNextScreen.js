@@ -12,7 +12,6 @@ import {useHttp} from "../../hooks/http.hook";
 import {DataContext} from "../../context/dataContext";
 import GlobalStyle from "../../components/GlobalStyle";
 import {Icon} from "../../components/icon/Icon";
-import { LinearTextGradient } from "react-native-text-gradient";
 import {styles} from "./useStyles";
 import {ItemsCity} from "../../components/textTags";
 import LinearGradient from 'react-native-linear-gradient';
@@ -42,7 +41,6 @@ function NewEventNextScreen({ route, navigation }) {
     }
 
     const creatHandler = async () => {
-        console.log("city-", formNew.city)
         if (!formNew.city) {
             setErrorCreat("Выберите город.");
             return
@@ -52,11 +50,6 @@ function NewEventNextScreen({ route, navigation }) {
             status_creat: true,
             form: {...form, ...formNew, status_chat_open},
         });
-        // try {
-        //     const data = await request('/api/events/creat', "POST", {...form}, {
-        //         Authorization: `${auth.token}`
-        //     });
-        // } catch (e) {}
     }
 
     const onPressSerch = async (text) => {
@@ -97,28 +90,7 @@ function NewEventNextScreen({ route, navigation }) {
 
     return (
         <>
-        
-
         <View style={styles.body}>
-
-        {errorCreat ? (
-            <View style={styles.modalError}>
-                <Text style={[
-                    GlobalStyle.CustomFontRegular,
-                    styles.textModalError,
-                ]}>
-                    {errorCreat}
-                </Text>
-                
-                <Pressable
-                    onPress={() => setErrorCreat("")}
-                    style={styles.buttonClearError}
-                >
-                    <Icon name="clear" size={22} color="#fff"/>
-                </Pressable>
-            </View>
-        ) : null}
-
             <View style={styles.linerHeader}>
                 <Pressable
                 onPress={backHandler}
@@ -126,18 +98,12 @@ function NewEventNextScreen({ route, navigation }) {
                 >
                     <Icon name="arrow-back-ios" size={26} />
                 </Pressable>
-
-                <LinearTextGradient 
-                locations={[0, 1]}
-                colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
-                style={[
+                <Text style={[
                     GlobalStyle.CustomFontMedium,
                     styles.headerText
                 ]}>
-                    <Text>MOVEON</Text>
-                </LinearTextGradient>
+                    MOVEON
+                </Text>
             </View>
             <View style={styles.linerRootChat}>
             <View style={styles.mainChat}>
@@ -147,17 +113,12 @@ function NewEventNextScreen({ route, navigation }) {
                     >
                     {status_chat_open ? (
                     <>
-                        <LinearTextGradient 
-                        locations={[0, 1]}
-                        colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        style={[
+                        <Text style={[
                             GlobalStyle.CustomFontRegular,
-                            styles.textItemChat
+                            styles.textItemChatActive
                         ]}>
-                            <Text>Открытый чат</Text>
-                        </LinearTextGradient>
+                            Открытый чат
+                        </Text>
                         
                         <Icon name="done" size={26} />
                         </>
@@ -177,17 +138,12 @@ function NewEventNextScreen({ route, navigation }) {
                     >
                     {!status_chat_open ? (
                     <>
-                        <LinearTextGradient 
-                        locations={[0, 1]}
-                        colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        style={[
+                        <Text style={[
                             GlobalStyle.CustomFontRegular,
-                            styles.textItemChat
+                            styles.textItemChatActive
                         ]}>
-                            <Text>Закрытый беседа</Text>
-                        </LinearTextGradient>
+                            Закрытая беседа
+                        </Text>
                         
                         <Icon name="done" size={26} />
                         </>
@@ -196,7 +152,7 @@ function NewEventNextScreen({ route, navigation }) {
                             GlobalStyle.CustomFontRegular,
                             styles.textItemChat
                         ]}>
-                            Закрытый беседа
+                            Закрытая беседа
                         </Text>
                     )}
                     </Pressable>
@@ -223,11 +179,19 @@ function NewEventNextScreen({ route, navigation }) {
                     numberOfLines={4}
                     maxLength={246}
                 />
+                {errorCreat ? (
+                        <Text style={[
+                            GlobalStyle.CustomFontRegular,
+                            styles.textModalError,
+                        ]}>
+                            {errorCreat}
+                        </Text>
+                ) : null}
                 <View style={styles.panelDate}>
                     <View style={styles.linerDate}>
                         <Pressable
                         style={styles.linerButtonCity}
-                        onPress = {() => {panel.show(); console.log("gggdffd")}}
+                        onPress = {() => panel.show()}
                         >
                             <Icon name="map" size={30} />
 
@@ -254,17 +218,12 @@ function NewEventNextScreen({ route, navigation }) {
                         style={styles.buttonYear}
                         onPress={() => setStatusAge(!statusAge)}
                         >
-                            <LinearTextGradient 
-                            locations={[0, 1]}
-                            colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 0, y: 1 }}
-                            style={[
+                            <Text style={[
                                 GlobalStyle.CustomFontMedium,
                                 styles.textButtonYear
                             ]}>
-                                <Text>{formNew.age}</Text>
-                            </LinearTextGradient>
+                                {formNew.age}
+                            </Text>
 
                             <Icon name="arrow-drop-down" size={30}/>
                         </Pressable>
@@ -343,33 +302,23 @@ function NewEventNextScreen({ route, navigation }) {
                         <Pressable
                         onPress={() => cityHandler(item)}
                         >
-                        <LinearTextGradient 
-                        locations={[0, 1]}
-                        colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        style={[
-                            GlobalStyle.CustomFontRegular,
-                            styles.textItemDialog
+                        <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textItemDialog,
                         ]}>
-                            <Text>{item}</Text>
-                        </LinearTextGradient>
+                            {item}
+                        </Text>
                         </Pressable>
                     ))) : (city.length ? (city.map((item, index) => (
                         <Pressable
                         onPress={() => cityHandler(item)}
                         >
-                        <LinearTextGradient 
-                        locations={[0, 1]}
-                        colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        style={[
-                            GlobalStyle.CustomFontRegular,
-                            styles.textItemDialog
+                        <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textItemDialog,
                         ]}>
-                            <Text>{item}</Text>
-                        </LinearTextGradient>
+                            {item}
+                        </Text>
                         </Pressable>
                     ))
                         

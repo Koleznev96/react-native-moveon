@@ -12,12 +12,16 @@ export const styles = StyleSheet.create({
         paddingTop: 16,
         backgroundColor: '#fff',
     },
+    textButtonYear: {
+        color: '#9b57da'
+    },
     main: {
         marginTop: 80,
         padding: 4,
     },
     headerText: {
         fontSize: 22,
+        color: '#9b57da'
     },
     linerHeader: {
         marginTop: 10, 
@@ -47,6 +51,7 @@ export const styles = StyleSheet.create({
         marginLeft: 5,
         fontSize: 18,
         marginRight: 0,
+        color: '#9b57da'
     },
     input: {
         paddingLeft: -4,
@@ -79,6 +84,7 @@ export const styles = StyleSheet.create({
     },
     textButtonDate: {
         fontSize: 15,
+        color: '#9b57da'
     },
     buttonDate: {
         position: 'absolute',
@@ -262,7 +268,7 @@ export const styles = StyleSheet.create({
     },
     textModalError: {
         fontSize: 15,
-        color: '#fff',
+        color: '#ff6363',
     },
     buttonClearError: {
         position: 'absolute',
@@ -302,6 +308,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
         marginTop: 15,
+        color: '#9b57da'
     },
     containerHeader: {
         width: 80,
@@ -349,5 +356,9 @@ export const styles = StyleSheet.create({
     },
     textItemChat: {
         marginRight: 4,
+    },
+    textItemChatActive: {
+        marginRight: 4,
+        color: '#9b57da'
     }
 });

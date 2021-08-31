@@ -33,6 +33,14 @@ export const styles = StyleSheet.create({
         width: 213,
         marginBottom: 10,
     },
+    textH2Ok: {
+        marginTop: 60,
+        fontSize: 18,
+        color: '#fff',
+        textAlign: 'center',
+        width: 213,
+        marginBottom: 10,
+    },
     textH3: {
         marginTop: 10,
         color: 'rgba(255, 255, 255, 0.5)',
@@ -51,6 +59,14 @@ export const styles = StyleSheet.create({
     },
     button: {
         marginTop: 20,
+        width: '100%',
+        height: 52,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        borderRadius: 26,
+    },
+    buttonOk: {
+        marginTop: 30,
         width: '100%',
         height: 52,
         backgroundColor: '#fff',

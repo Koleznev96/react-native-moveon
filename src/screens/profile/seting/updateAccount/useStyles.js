@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export const styles = StyleSheet.create({
     body: {
@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: 16,
         paddingRight: 16,
-        paddingTop: 16,
+        paddingTop: Platform.OS == "ios" ? 25 : 16,
         backgroundColor: '#fff',
     },
     headerText: {
@@ -89,7 +89,9 @@ export const styles = StyleSheet.create({
         borderRadius: 15,
         borderColor: '#C4C4C4',
         borderWidth: 1,
-        textAlignVertical: "top"
+        textAlignVertical: "top",
+        
+        
     },
     textInputDate: {
         fontSize: 14,
@@ -125,4 +127,7 @@ export const styles = StyleSheet.create({
     textButtonCreatNew: {
         color: '#fff',
     },
+    dataPicker: {
+        
+    }
 });

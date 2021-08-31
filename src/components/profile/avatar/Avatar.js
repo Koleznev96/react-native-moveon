@@ -8,7 +8,6 @@ import {httpServer} from '../../../../const';
 
 export const Avatar = (props) => {
     const url_avatar =  httpServer + "/" + (props.url_avatar ? props.url_avatar : "");
-    console.log("url_avatar-", url_avatar)
     return (
         <>
         {!props.url_avatar ? (

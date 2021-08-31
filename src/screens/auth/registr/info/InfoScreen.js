@@ -13,6 +13,7 @@ import {Loader} from "../../../../components/loader/Loader";
 import GlobalStyle from "../../../../components/GlobalStyle";
 import {styles} from "./useStyles";
 import LinearGradient from 'react-native-linear-gradient';
+import {Icon} from "../../../../components/icon/Icon";
 
 function InfoScreen({ route, navigation }) {
     const auth = useContext(AuthContext);
@@ -25,7 +26,6 @@ function InfoScreen({ route, navigation }) {
 
     const AuthHandler = async () => {
         if (statusAuth) {
-            console.log("ggggg")
             auth.login(route.params.token, route.params.email, route.params.password);
         } else {
             setStatusAuth(true);
@@ -48,10 +48,7 @@ function InfoScreen({ route, navigation }) {
                 onPress={() => onPressBack()}
                 style={styles.buttonBack}
                 >   
-                    <Image
-                    style={styles.iconBack}
-                    source={require('../../../../image/back.png')}
-                    />   
+                    <Icon name="arrow-back-ios" size={26} color="#fff"/>   
                 </Pressable>
             )}
 

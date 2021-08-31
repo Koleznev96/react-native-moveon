@@ -33,14 +33,14 @@ function SetingScreen({ route, navigation }) {
     const launchCameraImageHandler = () => {
         panel.hide();
         launchCamera({onData: true, mediaType: 'photo'}, (response) => {
-            console.log('Response = ', response);
-          
             if (response.didCancel) {
-              console.log('User cancelled image picker');
+            //   console.log('User cancelled image picker');
             } else if (response.error) {
-              console.log('ImagePicker Error: ', response.error);
+            //   console.log('ImagePicker Error: ', response.error);
             } else if (response.customButton) {
-              console.log('User tapped custom button: ', response.customButton);
+            //   console.log('User tapped custom button: ', response.customButton);
+            } else if (response.errorCode) {
+                // console.log('ImagePicker Error: ', response.errorCode);
             } else {
                 uploadImage(response.assets[0].uri, response.assets[0].fileName);
             }
@@ -49,15 +49,15 @@ function SetingScreen({ route, navigation }) {
 
     const launchImageLibraryHandler = () => {
         panel.hide();
-        launchImageLibrary({onData: true, mediaType: 'photo'}, (response) => {
-            console.log('Response = ', response);
-          
+        launchImageLibrary({onData: true, mediaType: 'photo'}, (response) => {          
             if (response.didCancel) {
-                console.log('User cancelled image picker');
+                // console.log('User cancelled image picker');
             } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                // console.log('ImagePicker Error: ', response.error);
             } else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
+                // console.log('User tapped custom button: ', response.customButton);
+            } else if (response.errorCode) {
+                // console.log('ImagePicker Error: ', response.errorCode);
             } else {
                 uploadImage(response.assets[0].uri, response.assets[0].fileName);
             }
@@ -99,11 +99,6 @@ function SetingScreen({ route, navigation }) {
         });
     }
 
-    const goSiteLegalInfo = async () => {
-        const url = 'https://moveon-app.com/about/legal-info.html';
-        Linking.openURL(url).catch(err => console.error('An error occurred', err));
-    };
-
     const addAvatarHandler = async () => {
         try {
             const data = await request('/api/profiles/profile', 'GET', null, {
@@ -112,6 +107,11 @@ function SetingScreen({ route, navigation }) {
             // setProfile(data);
         } catch (e) {}
     }
+
+    const goSiteLegalInfo = async () => { 
+        const url = 'https://moveon-app.com/about/legal-info.html'; 
+        Linking.openURL(url).catch(err => console.error('An error occurred', err)); 
+    };
 
     return (
         <View style={styles.body}>
@@ -207,7 +207,7 @@ function SetingScreen({ route, navigation }) {
                     </Pressable>
                 </LinearGradient>
 
-                <LinearGradient
+                {/* <LinearGradient
                 useAngle={true}
                 colors={['rgba(130, 83, 216, 1)', 'rgba(208, 93, 222, 1)']}
                 angle={180}
@@ -228,9 +228,9 @@ function SetingScreen({ route, navigation }) {
                             </View>
                         </View>
                     </Pressable>
-                </LinearGradient>
+                </LinearGradient> */}
 
-                <LinearGradient
+                {/* <LinearGradient
                 useAngle={true}
                 colors={['rgba(130, 83, 216, 1)', 'rgba(208, 93, 222, 1)']}
                 angle={180}
@@ -251,9 +251,9 @@ function SetingScreen({ route, navigation }) {
                             </View>
                         </Pressable>
                     </View>
-                </LinearGradient>
+                </LinearGradient> */}
 
-                <LinearGradient
+                {/* <LinearGradient
                 useAngle={true}
                 colors={['rgba(130, 83, 216, 1)', 'rgba(208, 93, 222, 1)']}
                 angle={180}
@@ -274,7 +274,7 @@ function SetingScreen({ route, navigation }) {
                             </View>
                         </Pressable>
                     </View>
-                </LinearGradient>
+                </LinearGradient> */}
                 </>
                 )}
             </View>
@@ -318,6 +318,7 @@ function SetingScreen({ route, navigation }) {
                 >
                     <View style={styles.borderItemDataWite}> 
                         <Pressable 
+                        onPress={() => navigation.navigate('Contact')}
                         style={styles.linerHeaderItemDataNema} 
                         >
                             <Text style={[
@@ -341,6 +342,7 @@ function SetingScreen({ route, navigation }) {
                 >
                     <View style={styles.borderItemDataWite}> 
                         <Pressable 
+                        onPress={() => navigation.navigate('AboutUs')}
                         style={styles.linerHeaderItemDataNema} 
                         >
                             <Text style={[

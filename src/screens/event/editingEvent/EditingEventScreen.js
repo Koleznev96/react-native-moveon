@@ -13,6 +13,7 @@ import {ItemsType} from "../../../components/textTags";
 import GlobalStyle from "../../../components/GlobalStyle";
 import { LinearTextGradient } from "react-native-text-gradient";
 import {styles} from "./useStyles";
+import {Icon} from "../../../components/icon/Icon";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import LinearGradient from 'react-native-linear-gradient';
 import SlidingUpPanel from 'rn-sliding-up-panel';
@@ -52,14 +53,6 @@ function EditingEventScreen({ navigation }) {
                 Authorization: `${auth.token}`
             });
         } catch (e) {}
-    }
-
-    // if (loading) {
-    //     return <Loader />
-    // }
-
-    const setTypeHandler = () => {
-        console.log("setTypeHandler");
     }
 
     function set_date(date) {
@@ -120,10 +113,7 @@ function EditingEventScreen({ navigation }) {
                         <Text>{form.type}</Text>
                     </LinearTextGradient>
                     
-                    <Image
-                    style={styles.iconSet}
-                    source={require('../../../icon/set.jpg')}
-                    />
+                    <Icon name="arrow-drop-down" size={30}/>
                     </Pressable>
                 </View>
 
@@ -136,10 +126,7 @@ function EditingEventScreen({ navigation }) {
                 />
                 <View style={styles.panelDate}>
                     <View style={styles.linerDate}>
-                        <Image
-                        style={styles.iconDate}
-                        source={require('../../../icon/date.jpg')}
-                        />
+                    <Icon name="insert-invitation" size={30}/>
 
                         <Text style={[
                             GlobalStyle.CustomFontRegular,
@@ -166,10 +153,7 @@ function EditingEventScreen({ navigation }) {
                         </Pressable>
                     </View>
                     <View style={styles.linerDate}>
-                        <Image
-                        style={styles.iconDate}
-                        source={require('../../../icon/time.jpg')}
-                        />
+                        <Icon name="query-builder" size={30}/>
 
                         <Text style={[
                             GlobalStyle.CustomFontRegular,

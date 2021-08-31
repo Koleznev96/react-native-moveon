@@ -40,9 +40,7 @@ export const useHttp = () => {
                 body = JSON.stringify(body)
                 headers['Content-Type'] = 'application/json'
             }
-            console.log("response-", httpServer + url, {method, body, headers})
             let response = await fetch(httpServer + url, {method, body, headers})
-            console.log("response-", response)
             if (!response.ok && response.status === 401) {
                 
                 const dataUserNew = await reAuthorization();
@@ -66,7 +64,6 @@ export const useHttp = () => {
 
             return data
         } catch (e) {
-            console.log("e-", e)
             setLoading(false)
             setError(e.message)
             throw e

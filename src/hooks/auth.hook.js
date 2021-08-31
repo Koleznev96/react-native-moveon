@@ -18,11 +18,9 @@ export const useAuth = () => {
 
     const logout = useCallback(async()=> {
         try {
-            console.log("yyy")
             await request('/api/profiles/not-online', 'POST', null, {
                 Authorization: `${token}`
             });
-            console.log("ttt")
         } catch (e) {}
 
         setToken(null);

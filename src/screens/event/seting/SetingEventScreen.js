@@ -395,7 +395,7 @@ function SetingEventScreen({ route, navigation }) {
                     <View style={styles.linerDate}>
                         <Pressable
                         style={styles.linerButtonCity}
-                        onPress = {() => {panelT.show(); console.log("gggdffd")}}
+                        onPress = {() => panelT.show()}
                         >
                             <Icon name="map" size={30} />
 

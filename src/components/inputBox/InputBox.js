@@ -79,7 +79,6 @@ export const InputBox = (props) => {
             const data = await request('/api/chats/message', 'POST', {id_chat: chatData.id_chat_active, message: message, id_personal_profile: props.profile_id ? props.profile_id : null}, {
                 Authorization: `${auth.token}`
             });
-            console.log("fffffff-", data)
             chatData.nextIdChat(data.id_chat);
         } catch (e) {}
     }

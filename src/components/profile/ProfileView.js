@@ -44,15 +44,15 @@ export const ProfileView = ({navigation, idProfile}) => {
 
     const launchCameraImageHandler = () => {
         setPanel(false)
-        launchCamera({onData: true, mediaType: 'photo'}, (response) => {
-            console.log('Response = ', response);
-          
+        launchCamera({onData: true, mediaType: 'photo'}, (response) => {          
             if (response.didCancel) {
-              console.log('User cancelled image picker');
+            //   console.log('User cancelled image picker');
             } else if (response.error) {
-              console.log('ImagePicker Error: ', response.error);
+            //   console.log('ImagePicker Error: ', response.error);
             } else if (response.customButton) {
-              console.log('User tapped custom button: ', response.customButton);
+            //   console.log('User tapped custom button: ', response.customButton);
+            } else if (response.errorCode) {
+            // console.log('ImagePicker Error: ', response.errorCode);
             } else {
                 uploadImage(response.assets[0].uri, response.assets[0].fileName);
             }
@@ -61,15 +61,15 @@ export const ProfileView = ({navigation, idProfile}) => {
 
     const launchImageLibraryHandler = () => {
         setPanel(false)
-        launchImageLibrary({onData: true, mediaType: 'photo'}, (response) => {
-            console.log('Response = ', response);
-          
+        launchImageLibrary({onData: true, mediaType: 'photo'}, (response) => {          
             if (response.didCancel) {
-                console.log('User cancelled image picker');
+                // console.log('User cancelled image picker');
             } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                // console.log('ImagePicker Error: ', response.error);
             } else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
+                // console.log('User tapped custom button: ', response.customButton);
+            } else if (response.errorCode) {
+                // console.log('ImagePicker Error: ', response.errorCode);
             } else {
                 uploadImage(response.assets[0].uri, response.assets[0].fileName);
             }
@@ -117,7 +117,6 @@ export const ProfileView = ({navigation, idProfile}) => {
             setProfile(data.profile);
             setStatusProfileMy(data.statusProfileMy);
             setSubside({subscribers: data.subscribers, subscriptions: data.subscriptions});
-            console.log("subscribers-", data.subscriptions)
             if(data.status_subscriber){
                 setStatus_subscriber(data.status_subscriber);
             }

@@ -10,14 +10,21 @@ import {Icon} from "./components/icon/Icon";
 import ChatsScreen from './screens/chats/ChatsScreen';
 import ChatScreen from './screens/chats/chat/ChatScreen';
 
+
 import ProfileScreen from './screens/profile/ProfileScreen';
 import UseProfileScreen from './screens/profile/useProfile/UseProfileScreen';
-import SetingScreen from './screens/profile/seting/SetingScreen';
+
 import SubscriptionsScreen from './screens/profile/subscri/SubscriptionsScreen';
 import SubscribersScreen from './screens/profile/subscri/SubscribersScreen';
-import UpdateAccountScreen from './screens/profile/seting/updateAccount/UpdateAccountScreen';
+
 import ComplaintScreen from './screens/profile/complaint/ComplaintScreen';
 import NextComplaintScreen from './screens/profile/complaint/nexComplaint/NextComplaintScreen';
+
+import SetingScreen from './screens/profile/seting/SetingScreen';
+import UpdateAccountScreen from './screens/profile/seting/updateAccount/UpdateAccountScreen';
+import AboutUsScreen from './screens/profile/seting/aboutUs/AboutUsScreen';
+import ContactScreen from './screens/profile/seting/contact/ContactScreen';
+
 
 import NewEventScreen from './screens/newEvent/NewEventScreen';
 import NewEventNextScreen from './screens/newEvent/NewEventNextScreen';
@@ -32,10 +39,16 @@ import NotificationsScreen from './screens/home/notifications/NotificationsScree
 
 import GeolocationScreen from './screens/geolocation/GeolocationScreen';
 
+
 import InfoScreen from './screens/auth/registr/info/InfoScreen';
 import AuthorizationScreen from './screens/auth/login/AuthorizationScreen';
 import RegistrationScreen from './screens/auth/registr/RegistrationScreen';
 import CodeCheckScreen from './screens/auth/registr/codeCheck/CodeCheckScreen';
+
+import TelephoneScreen from './screens/auth/login/passwordRecovery/TelephoneScreen';
+import CodeScreen from './screens/auth/login/passwordRecovery/CodeScreen';
+import PasswordScreen from './screens/auth/login/passwordRecovery/PasswordScreen';
+import OkScreen from './screens/auth/login/passwordRecovery/OkScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -137,7 +150,6 @@ export const Routes = isAuthenticated => {
       nextAppState === "active"
     ) {
       // вернулся из background
-      console.log("App has come to the foreground!");
     }
     appState.current = nextAppState;
     const jwt = await AsyncStorage.getItem("JWT");
@@ -176,13 +188,21 @@ export const Routes = isAuthenticated => {
           <Stack.Screen name='UpdateAccount' component={UpdateAccountScreen} options={{ headerShown: false }}/>
           <Stack.Screen name='Complaint' component={ComplaintScreen} options={{ headerShown: false }}/>
           <Stack.Screen name='NextComplaint' component={NextComplaintScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name='AboutUs' component={AboutUsScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name='Contact' component={ContactScreen} options={{ headerShown: false }}/>
         </Stack.Navigator>
       ) : ( 
         <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen name='Login' component={AuthorizationScreen} options={{ headerShown: false }}/>
+
           <Stack.Screen name='Register' component={RegistrationScreen} options={{ headerShown: false }}/>
           <Stack.Screen name='CodeCheck' component={CodeCheckScreen} options={{ headerShown: false }}/>
           <Stack.Screen name='Info' component={InfoScreen} options={{ headerShown: false }}/>
+
+          <Stack.Screen name='Telephone' component={TelephoneScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name='Code' component={CodeScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name='Password' component={PasswordScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name='Ok' component={OkScreen} options={{ headerShown: false }}/>
         </Stack.Navigator>
       )} 
     </NavigationContainer>

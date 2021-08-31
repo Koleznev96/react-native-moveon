@@ -8,7 +8,6 @@ export const useNotification = () => {
         try {
             setNotifications([...notifications_list]);
         } catch (e) {
-            console.log("stop")
         }
     }, []);
 
@@ -27,7 +26,6 @@ export const useNotification = () => {
             for (let i = 0; i < notificationNew.length; i++) {
                 if (notificationNew[i]._id === id_notification) {
                     index = i;
-                    console.log("index-", i);
                     break;
                 }
             }

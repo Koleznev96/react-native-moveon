@@ -10,6 +10,7 @@ import {AuthContext} from "../../../context/authContext";
 import {useHttp} from "../../../hooks/http.hook";
 import {Loader} from "../../../components/loader/Loader";
 import GlobalStyle from "../../../components/GlobalStyle";
+import {Icon} from "../../../components/icon/Icon";
 import {styles} from "./useStyles";
 import LinearGradient from 'react-native-linear-gradient';
 import PushNotification from 'react-native-push-notification';
@@ -27,7 +28,6 @@ function AuthorizationScreen({ navigation }) {
 
     PushNotification.configure({
         onRegister: function(token) {
-            console.log('TOKEN-', token);
             setFcm_token(token.token);
         }
     });
@@ -50,11 +50,14 @@ function AuthorizationScreen({ navigation }) {
     };
 
     const onPressBack = () => {
+        clearError();
         setStatusAuth(false);
     };
 
     const onPressForgotPassword = () => {
-        console.log("onPressForgotPassword")
+        navigation.navigate('Telephone', {
+            telephone: form.email,
+        });
     };
 
     if (loading) {
@@ -67,27 +70,6 @@ function AuthorizationScreen({ navigation }) {
             colors={['rgba(130, 83, 216, 1)', 'rgba(208, 93, 222, 1)']}
             angle={180}
             style={styles.body}>
-            
-            {error && (
-                <View style={styles.modalError}>
-                    <Text style={[
-                        GlobalStyle.CustomFontRegular,
-                        styles.textModalError,
-                    ]}>
-                        {error}
-                    </Text>
-
-                    <Pressable 
-                        onPress={() => clearError()}
-                        style={styles.buttonClearError}
-                    >   
-                        <Image
-                        style={styles.iconClouse}
-                        source={require('../../../icon/clouse.png')}
-                        />   
-                    </Pressable>
-                </View>
-            )}
 
             <View style={styles.root}>
 
@@ -96,10 +78,7 @@ function AuthorizationScreen({ navigation }) {
                 onPress={() => onPressBack()}
                 style={styles.buttonBack}
                 >   
-                    <Image
-                    style={styles.iconBack}
-                    source={require('../../../image/back.png')}
-                    />   
+                    <Icon name="arrow-back-ios" size={26} color="#fff"/> 
                 </Pressable>
             )}
             
@@ -156,7 +135,16 @@ function AuthorizationScreen({ navigation }) {
                 onChangeText={(value)=>setForm({...form, password: value})}
                 />
             )}
-                
+
+            {error && (
+                    <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textModalError,
+                    ]}>
+                        {error}
+                    </Text>
+            )}
+
             <Pressable
                 onPress={ AuthHandler }
                 style={[styles.button, ({ pressed }) => ({backgroundColor: pressed ? '#8F8F8F' : '#757171'})]}

@@ -12,7 +12,6 @@ import GlobalStyle from "../../../../components/GlobalStyle";
 import {styles} from "./useStyles";
 import { LinearTextGradient } from "react-native-text-gradient";
 import LinearGradient from 'react-native-linear-gradient';
-import {MinLoader} from "../../../../components/loader/minLoader/MinLoader";
 import {Icon} from "../../../../components/icon/Icon";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -46,7 +45,6 @@ function UpdateAccountScreen({ route, navigation }) {
 
     const showMode = (currentMode) => {
         setShow(true);
-        console.log("hhhhhhh")
     };
 
     const showDatepicker = () => {
@@ -115,8 +113,20 @@ function UpdateAccountScreen({ route, navigation }) {
                     ]}>
                         {profile.date ? (profile.date.getDate() + "." + (profile.date.getMonth() + 1) + "." + profile.date.getFullYear()) : ""}
                     </Text>
-                </Pressable>
 
+                    
+                </Pressable>
+                {show && (
+                <DateTimePicker
+                style={styles.dataPicker}
+                testID="dateTimePickery"
+                value={profile.date ? profile.date : date}
+                mode={'date'}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+                />
+            )}
             </ScrollView>
             <View style={styles.buttonPanelNew}>
             <Pressable
@@ -139,16 +149,7 @@ function UpdateAccountScreen({ route, navigation }) {
             </Pressable>
             </View>
 
-            {show && (
-                <DateTimePicker
-                testID="dateTimePickery"
-                value={profile.date ? profile.date : new Date()}
-                mode={'date'}
-                is24Hour={true}
-                display="default"
-                onChange={onChange}
-                />
-            )}
+            
         </View>
     );
 }

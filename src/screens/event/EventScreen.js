@@ -62,7 +62,6 @@ function EventScreen({ route, navigation }) {
                     Authorization: `${auth.token}`
                 });
             }
-            console.log("setDataEvent-", data)
             setDataEvent(data);
             const dateNew = new Date(data.event.date);
             setDate(dateNew.getDate() + "." + dateNew.getMonth() + "." + dateNew.getFullYear() + "  " + dateNew.getHours() + ":" + dateNew.getMinutes());
@@ -98,15 +97,11 @@ function EventScreen({ route, navigation }) {
         });
     }
 
-    const shareHandler = () => {
-        console.log("shareHandler");
-    }
-
-    const setingHandler = () => {
-        navigation.navigate('SetingEvent', {
-            idEvent: id
-        });
-    }
+    // const setingHandler = () => {
+    //     navigation.navigate('SetingEvent', {
+    //         idEvent: id
+    //     });
+    // }
 
     const goHandler = async () => {
         try {
@@ -368,9 +363,7 @@ function EventScreen({ route, navigation }) {
             style={styles.buttonSend}
             onPress={nextChatHandler}
             >
-                <Image
-                source={require('../../icon/setingMax.png')}
-                />
+            
             </Pressable>
             ) : null} */}
         </View>

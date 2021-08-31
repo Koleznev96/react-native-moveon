@@ -130,6 +130,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
         marginTop: 15,
+        color: '#9b57da'
     },
     containerHeader: {
         width: 80,

@@ -8,10 +8,10 @@ class LocalNotificationService {
         // notificationData = useContext(NotificationContext);
         PushNotification.configure({
             onRegister : function (token) {
-                console.log("[LocalNotificationService] onRegister:",token);
+                // console.log("[LocalNotificationService] onRegister:",token);
             },
             onNotification: function (notification) {
-                console.log("[LocalNotificationService] onNotification:",notification);
+                // console.log("[LocalNotificationService] onNotification:",notification);
                 if(!notification?.data) {
                     return
                 }
@@ -87,7 +87,7 @@ class LocalNotificationService {
     }
 
     removeDeliveredNotificationByID = (notificationId) => {
-        console.log("[LocalNotificationService] removeDeliveredNotificationByID:", notificationId);
+        // console.log("[LocalNotificationService] removeDeliveredNotificationByID:", notificationId);
         // notification.addNotification(notificationId)
         PushNotification.cancelLocalNotifications({id: `${notificationId}`})
     }

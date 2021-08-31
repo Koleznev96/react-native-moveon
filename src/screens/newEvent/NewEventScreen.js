@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {
     Text,
     View,
@@ -7,20 +7,15 @@ import {
     ScrollView,
     Linking
 } from 'react-native';
-import {AuthContext} from "../../context/authContext";
-import {useHttp} from "../../hooks/http.hook";
 import {ItemsType} from "../../components/textTags";
 import GlobalStyle from "../../components/GlobalStyle";
 import {Icon} from "../../components/icon/Icon";
-import { LinearTextGradient } from "react-native-text-gradient";
 import {styles} from "./useStyles";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import LinearGradient from 'react-native-linear-gradient';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 
 function NewEventScreen({ navigation }) {
-    const auth = useContext(AuthContext);
-    const {loading, request, error, clearError} = useHttp();
     const [form, setForm] = useState({
         type: "#OnlyForGirls", name: "", date: new Date()
     });
@@ -56,19 +51,6 @@ function NewEventScreen({ navigation }) {
         navigation.navigate('NewEventNext', {
             form: form
         });
-        // try {
-        //     const data = await request('/api/events/creat', "POST", {...form}, {
-        //         Authorization: `${auth.token}`
-        //     });
-        // } catch (e) {}
-    }
-
-    // if (loading) {
-    //     return <Loader />
-    // }
-
-    const setTypeHandler = () => {
-        console.log("setTypeHandler");
     }
 
     const URLHandler = () => {
@@ -96,39 +78,14 @@ function NewEventScreen({ navigation }) {
 
     return (
         <>
-        
         <View style={styles.body}>
-        {errorCreat ? (
-            <View style={styles.modalError}>
-                <Text style={[
-                    GlobalStyle.CustomFontRegular,
-                    styles.textModalError,
-                ]}>
-                    {errorCreat}
-                </Text>
-                
-                <Pressable
-                    onPress={() => setErrorCreat("")}
-                    style={styles.buttonClearError}
-                >
-                    <Icon name="clear" size={22} color="#fff"/>
-                </Pressable>
-            </View>
-        ) : null} 
-            
-
             <View style={styles.linerHeader}>
-                <LinearTextGradient 
-                locations={[0, 1]}
-                colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
-                style={[
-                    GlobalStyle.CustomFontMedium,
-                    styles.headerText
-                ]}>
-                    <Text>MOVEON</Text>
-                </LinearTextGradient>
+            <Text style={[
+            GlobalStyle.CustomFontRegular,
+            styles.headerText,
+            ]}>
+                MOVEON
+            </Text>
             </View>
 
             <View style={styles.main}>
@@ -143,17 +100,12 @@ function NewEventScreen({ navigation }) {
                     style={styles.buttonType}
                     onPress={() => panel.show()}
                     >
-                    <LinearTextGradient 
-                    locations={[0, 1]}
-                    colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 0, y: 1 }}
-                    style={[
-                        GlobalStyle.CustomFontRegular,
-                        styles.textItemType
+                    <Text style={[
+                    GlobalStyle.CustomFontRegular,
+                    styles.textItemType,
                     ]}>
-                        <Text>{form.type}</Text>
-                    </LinearTextGradient>
+                        {form.type}
+                    </Text>
                     
                     <Icon name="arrow-drop-down" size={30}/>
                     </Pressable>
@@ -166,6 +118,14 @@ function NewEventScreen({ navigation }) {
                     multiline
                     numberOfLines={2}
                 />
+                {errorCreat ? (
+                        <Text style={[
+                            GlobalStyle.CustomFontRegular,
+                            styles.textModalError,
+                        ]}>
+                            {errorCreat}
+                        </Text>
+                ) : null} 
                 <View style={styles.panelDate}>
                     <View style={styles.linerDate}>
                         <Icon name="insert-invitation" size={30}/>
@@ -181,17 +141,12 @@ function NewEventScreen({ navigation }) {
                         style={styles.buttonDate}
                         onPress={showDatepicker}
                         >
-                            <LinearTextGradient 
-                            locations={[0, 1]}
-                            colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 0, y: 1 }}
-                            style={[
-                                GlobalStyle.CustomFontRegular,
-                                styles.textButtonDate
+                            <Text style={[
+                            GlobalStyle.CustomFontRegular,
+                            styles.textButtonDate,
                             ]}>
-                                <Text>изменить</Text>
-                            </LinearTextGradient>
+                                изменить
+                            </Text>
                         </Pressable>
                     </View>
                     <View style={styles.linerDate}>
@@ -208,17 +163,12 @@ function NewEventScreen({ navigation }) {
                         style={styles.buttonDate}
                         onPress={showTimepicker}
                         >
-                            <LinearTextGradient 
-                            locations={[0, 1]}
-                            colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 0, y: 1 }}
-                            style={[
-                                GlobalStyle.CustomFontRegular,
-                                styles.textButtonDate
+                            <Text style={[
+                            GlobalStyle.CustomFontRegular,
+                            styles.textButtonDate,
                             ]}>
-                                <Text>изменить</Text>
-                            </LinearTextGradient>
+                                изменить
+                            </Text>
                         </Pressable>
                     </View>
                 </View>
@@ -298,17 +248,12 @@ function NewEventScreen({ navigation }) {
                     <Pressable
                     onPress={() => {setForm({...form, type: item.type}); panel.hide()}}
                     >
-                    <LinearTextGradient 
-                    locations={[0, 1]}
-                    colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 0, y: 1 }}
-                    style={[
-                        GlobalStyle.CustomFontRegular,
-                        styles.textItemDialog
+                    <Text style={[
+                    GlobalStyle.CustomFontRegular,
+                    styles.textItemDialog,
                     ]}>
-                        <Text>{item.text}</Text>
-                    </LinearTextGradient>
+                        {item.text}
+                    </Text>
                     </Pressable>
                 ))}
                 </ScrollView>

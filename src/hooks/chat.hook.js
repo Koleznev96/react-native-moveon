@@ -31,7 +31,6 @@ export const useChat = () => {
 
     const addMessage = useCallback(async(message, list) => {
         try {
-            console.log("statr-message-", message, list)
             let newMessage = [...list, message];
             setMessages(newMessage);
         } catch (e) {}

@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
     StyleSheet,
     Text,
@@ -7,19 +7,17 @@ import {
     Pressable,
     Image
 } from 'react-native';
-import {AuthContext} from "../../../../context/authContext";
 import {useHttp} from "../../../../hooks/http.hook";
 import {Loader} from "../../../../components/loader/Loader";
 import GlobalStyle from "../../../../components/GlobalStyle";
 import {styles} from "./useStyles";
 import LinearGradient from 'react-native-linear-gradient';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import {Icon} from "../../../../components/icon/Icon";
 
 function CodeCheckScreen({ route, navigation }) {
     const {loading, request, error, clearError} = useHttp();
     const [dataReg, setDataReg] = useState({...route.params});
     const [code, setCode] = useState("");
-    const date = new Date();
 
     const AuthHandler = async () => {
         clearError();
@@ -48,37 +46,13 @@ function CodeCheckScreen({ route, navigation }) {
             angle={180}
             style={styles.body}>
 
-            {error ? (
-                <View style={styles.modalError}>
-                    <Text style={[
-                        GlobalStyle.CustomFontRegular,
-                        styles.textModalError,
-                    ]}>
-                        {error}
-                    </Text>
-
-                    <Pressable 
-                        onPress={() => clearError()}
-                        style={styles.buttonClearError}
-                    >   
-                        <Image
-                        style={styles.iconClouse}
-                        source={require('../../../../icon/clouse.png')}
-                        />   
-                    </Pressable>
-                </View>
-            ) : null}
-
             <View style={styles.root}>
 
                 <Pressable 
                 onPress={() => onPressBack()}
                 style={styles.buttonBack}
                 >   
-                    <Image
-                    style={styles.iconBack}
-                    source={require('../../../../image/back.png')}
-                    />   
+                    <Icon name="arrow-back-ios" size={26} color="#fff"/>    
                 </Pressable>
 
                 <Text style={[
@@ -99,7 +73,14 @@ function CodeCheckScreen({ route, navigation }) {
                     placeholder='XXXXXX'
                     onChangeText={(value)=>setCode(value)}
                 />
-
+                {error ? (
+                        <Text style={[
+                            GlobalStyle.CustomFontRegular,
+                            styles.textModalError,
+                        ]}>
+                            {error}
+                        </Text>
+                ) : null}   
                 <Pressable
                     onPress={ AuthHandler }
                     style={[styles.button, ({ pressed }) => ({backgroundColor: pressed ? '#8F8F8F' : '#757171'})]}

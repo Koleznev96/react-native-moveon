@@ -58,7 +58,6 @@ function HomeScreen({ navigation }) {
         try {
             let dataEvents;
             if (city) {
-                console.log("data.cityData-", city)
                 dataEvents = await request(`/api/events/search`, 'POST', {filters : {city}}, {
                     Authorization: `${auth.token}`
                 });
@@ -325,34 +324,24 @@ function HomeScreen({ navigation }) {
                         onPress={() => cityHandler(item)}
                         key={index.toString()}
                         >
-                        <LinearTextGradient 
-                        locations={[0, 1]}
-                        colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        style={[
-                            GlobalStyle.CustomFontRegular,
-                            styles.textItemDialog
+                        <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textItemDialog,
                         ]}>
-                            <Text>{item}</Text>
-                        </LinearTextGradient>
+                            {item}
+                        </Text>
                         </Pressable>
                     ))) : (city.length ? (city.map((item, index) => (
                         <Pressable
                         onPress={() => cityHandler(item)}
                         key={index.toString()}
                         >
-                        <LinearTextGradient 
-                        locations={[0, 1]}
-                        colors={['rgba(74, 9, 210, 1)', 'rgba(193, 10, 203, 1)']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 0, y: 1 }}
-                        style={[
-                            GlobalStyle.CustomFontRegular,
-                            styles.textItemDialog
+                        <Text style={[
+                        GlobalStyle.CustomFontRegular,
+                        styles.textItemDialog,
                         ]}>
-                            <Text>{item}</Text>
-                        </LinearTextGradient>
+                            {item}
+                        </Text>
                         </Pressable>
                     ))
                         

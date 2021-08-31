@@ -107,7 +107,7 @@ export const styles = StyleSheet.create({
     },
     textModalError: {
         fontSize: 15,
-        color: '#fff',
+        color: '#ff6363',
     },
     buttonClearError: {
         position: 'absolute',

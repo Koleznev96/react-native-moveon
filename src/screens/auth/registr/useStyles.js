@@ -1,4 +1,7 @@
 import { StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
+
+const height = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
     body: {
@@ -107,7 +110,7 @@ export const styles = StyleSheet.create({
     },
     textModalError: {
         fontSize: 15,
-        color: '#fff',
+        color: '#ff6363',
     },
     buttonClearError: {
         position: 'absolute',
@@ -115,9 +118,9 @@ export const styles = StyleSheet.create({
     },
     buttonUrlPolitic: {
         width: '100%',
-        position: 'absolute',
+        position: 'relative',
         left: 16,
-        bottom: 20,
+        bottom: -15,
     },
     textIUrlPolitic: {
         fontSize: 13,
